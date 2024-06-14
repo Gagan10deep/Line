@@ -37,8 +37,11 @@
       <li>Install NPM packages
           <pre><code>npm install</code></pre>
       </li>
-      <li>Start the development server
-          <pre><code>npm start</code></pre>
+      <li>Start the backend
+          <pre><code>npm run server</code></pre>
+      </li>
+     <li>Start the frontend
+          <pre><code>npm run dev</code></pre>
       </li>
   </ol>
 
