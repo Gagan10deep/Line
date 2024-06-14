@@ -32,7 +32,7 @@
   <h3>Installation</h3>
   <ol>
       <li>Clone the repo
-          <pre><code>git clone https://github.com/your_username/line-chat-app.git</code></pre>
+          <pre><code>git clone https://github.com/gagan10deep/line-chat-app.git</code></pre>
       </li>
       <li>Install NPM packages
           <pre><code>npm install</code></pre>
