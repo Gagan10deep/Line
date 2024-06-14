@@ -1,38 +1,24 @@
-//import { useSocketContext } from "../../context/SocketContext";
-import useConversation from "../../zustand/useConversation";
+import useGetConversations from "../../hooks/useGetConversations";
+//import { getRandomEmoji } from "../../utils/emojis";
+import Conversation from "./Conversation";
 
-const Conversation = ({ conversation, lastIdx, emoji }) => {
-  const { selectedConversation, setSelectedConversation } = useConversation();
-
-  const isSelected = selectedConversation?._id === conversation._id;
-  //const { onlineUsers } = useSocketContext();
-  //const isOnline = onlineUsers.includes(conversation._id);
-
+const Conversations = () => {
+  const { loading, conversations } = useGetConversations();
   return (
-    <>
-      <div
-        className={`flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer
-				${isSelected ? "bg-sky-500" : ""}
-			`}
-        onClick={() => setSelectedConversation(conversation)}
-      >
-        <div className={`avatar ${isOnline ? "online" : ""}`}>
-          <div className="w-12 rounded-full">
-            <img src={conversation.profilePic} alt="user avatar" />
-          </div>
-        </div>
+    <div className="py-2 flex flex-col overflow-auto">
+      {conversations.map((conversation, idx) => (
+        <Conversation
+          key={conversation._id}
+          conversation={conversation}
+          //emoji={getRandomEmoji()}
+          lastIdx={idx === conversations.length - 1}
+        />
+      ))}
 
-        <div className="flex flex-col flex-1">
-          <div className="flex gap-3 justify-between">
-            <p className="font-bold text-gray-200">{conversation.fullName}</p>
-            <span className="text-xl">{emoji}</span>
-          </div>
-        </div>
-      </div>
-
-      {!lastIdx && <div className="divider my-0 py-0 h-1" />}
-    </>
+      {loading ? (
+        <span className="loading loading-spinner mx-auto"></span>
+      ) : null}
+    </div>
   );
 };
-export default Conversation;
-
+export default Conversations;

@@ -2,10 +2,13 @@ import bcrypt from "bcryptjs";
 
 import User from "../models/user.model.js";
 import generateToken from "../utils/generateToken.js";
+////import Token from "../models/token.model.js";
+////import sendEmail from "../utils/sendEmail.js";
 
 export const signup = async (req, res) => {
   try {
-    const { fullName, username, password, confirmPassword, gender } = req.body;
+    const { fullName, username, password, confirmPassword, gender } =
+      req.body;
 
     if (password !== confirmPassword) {
       return res.status(400).json({
@@ -27,6 +30,7 @@ export const signup = async (req, res) => {
 
     const newUser = new User({
       fullName,
+    //  email,
       username,
       password,
       confirmPassword,
@@ -36,7 +40,19 @@ export const signup = async (req, res) => {
 
     generateToken(newUser._id, res);
     await newUser.save();
+    // const key = Math.random().toString(36).slice(-8);
+    // const hashedKey = bcrypt.hashSync(key, 10);
 
+    // const token = new Token({
+    //   _userId: newUser._id,
+    //   token: hashedKey,
+    // });
+
+    // Email verification steps here
+    //  await token.save();
+
+    //  sendEmail(req, newUser.email, token);
+    //  res.status(200).json("A verification link has been sent to your email");
     res.status(201).json({
       _id: newUser._id,
       fullname: newUser.fullName,
@@ -48,6 +64,59 @@ export const signup = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+// Email verification code
+// export const confirmEmail = (req, res) => {
+//   Token.findOne({ token: req.params.token }, function (err, token) {
+//     // token is not found into database i.e. token may have expired
+//     if (!token) {
+//       return res
+//         .status(400)
+//         .send({
+//           msg: "Your verification link may have expired. Please click on resend for verify your Email.",
+//         });
+//     }
+//     // if token is found then check valid user
+//     else {
+//       User.findOne(
+//         { _id: token._userId, email: req.params.email },
+//         function (err, user) {
+//           // not valid user
+//           if (!user) {
+//             return res
+//               .status(401)
+//               .send({
+//                 msg: "We were unable to find a user for this verification. Please SignUp!",
+//               });
+//           }
+//           // user is already verified
+//           else if (user.isVerified) {
+//             return res
+//               .status(200)
+//               .send("User has been already verified. Please Login");
+//           }
+//           // verify user
+//           else {
+//             // change isVerified to true
+//             user.isVerified = true;
+//             user.save(function (err) {
+//               // error occur
+//               if (err) {
+//                 return res.status(500).send({ msg: err.message });
+//               }
+//               // account successfully verified
+//               else {
+//                 return res
+//                   .status(200)
+//                   .send("Your account has been successfully verified");
+//               }
+//             });
+//           }
+//         }
+//       );
+//     }
+//   });
+// };
 
 export const login = async (req, res) => {
   try {
@@ -62,6 +131,12 @@ export const login = async (req, res) => {
         error: "Invalid user or password ",
       });
     }
+
+    // if (!user.isVerified) {
+    //   return res.status(401).json({
+    //     error: "Your email is not verified",
+    //   });
+    // }
 
     generateToken(user._id, res);
 

@@ -6,6 +6,7 @@ import useSignup from "../../hooks/useSignup";
 const SignUp = () => {
   const [inputs, setInputs] = useState({
     fullName: "",
+    email: "",
     username: "",
     password: "",
     confirmPassword: "",
@@ -20,7 +21,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   
+
     await signup(inputs);
   };
 
@@ -46,6 +47,21 @@ const SignUp = () => {
               }
             />
           </div>
+
+          {/* <div>
+            <label className="label p-2">
+              <span className="text-base label-text">Email</span>
+            </label>
+            <input
+              type="email"
+              placeholder="John Doe"
+              className="w-full input input-bordered  h-10"
+              value={inputs.email}
+              onChange={(e) =>
+                setInputs({ ...inputs, email: e.target.value })
+              }
+            />
+          </div> */}
 
           <div>
             <label className="label p-2 ">
