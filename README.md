@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Line Chat App</title>
-</head>
-<body>
+
   <h1>Line Chat App</h1>
   <p>Line is a real-time chat application built with the MERN stack (MongoDB, Express.js, React.js, Node.js) and Socket.io. It provides a seamless and interactive chat experience with real-time messaging capabilities.</p>
 
@@ -75,5 +68,4 @@
   <h2>Contact</h2>
   <p>Your Name - <a href="https://twitter.com/your_twitter" target="_blank">@your_twitter</a> - your_email@example.com</p>
   <p>Project Link: <a href="https://github.com/your_username/line-chat-app" target="_blank">https://github.com/your_username/line-chat-app</a></p>
-</body>
-</html>
+
