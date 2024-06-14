@@ -65,10 +65,6 @@
       <li>Open a Pull Request</li>
   </ol>
 
-  <h2>License</h2>
-  <p>Distributed under the MIT License. See <code>LICENSE</code> for more information.</p>
+  
 
-  <h2>Contact</h2>
-  <p>Your Name - <a href="https://twitter.com/your_twitter" target="_blank">@your_twitter</a> - your_email@example.com</p>
-  <p>Project Link: <a href="https://github.com/your_username/line-chat-app" target="_blank">https://github.com/your_username/line-chat-app</a></p>
 
